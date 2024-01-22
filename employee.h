@@ -14,7 +14,6 @@ public:
     QString getType() const;
     QVariant getAttribute(const QString& key) const;
     void setAttribute(const QString& key, const QVariant& value);
-
     QVariantMap calculateSalary() const;
 
 private:

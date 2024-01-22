@@ -1,0 +1,11 @@
+Name,SSN,Type,MonthlyCompensation,HourlyRate,DoneHours,BonusPercentage,RealizedOutcome,OutcomeClaim
+Jan Kowalski,DDMMYYCZZZQ,Monthly Paid Employee,3000,0,0,0,0,false
+Jadwiga Kowalska,DDMMYYCZZZQ,Hourly Paid Employee,0,20,160,0,0,false
+Alicja Nowak,DDMMYYCZZZQ,Salesman,2500,0,0,10,5000,true
+Robert Brązowy,DDMMYYCZZZQ,Monthly Paid Employee,3200,0,0,0,0,false
+Karolina Biała,DDMMYYCZZZQ,Hourly Paid Employee,0,25,140,0,0,false
+Dawid Zielony,DDMMYYCZZZQ,Salesman,2500,0,0,10,5000,false
+Ewa Czarna,DDMMYYCZZZQ,Monthly Paid Employee,2900,0,0,0,0,false
+Franciszek Szary,DDMMYYCZZZQ,Hourly Paid Employee,0,22,150,0,0,false
+Grażyna Srebrna,DDMMYYCZZZQ,Salesman,2500,0,0,10,5000,false
+Henryk Złoty,DDMMYYCZZZQ,Monthly Paid Employee,2800,0,0,0,0,false

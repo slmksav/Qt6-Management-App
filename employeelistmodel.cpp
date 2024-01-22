@@ -4,11 +4,14 @@
 EmployeeListModel::EmployeeListModel(EmployeeManager* manager, QObject *parent)
     : QAbstractListModel(parent), employeeManager(manager) {}
 
+// num of rows = num of employees
 int EmployeeListModel::rowCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
     return employeeManager->getEmployees().count();
 }
 
+// fetches specific data for an employee based on the given index and role, the data returned depends on the role
+// data is retrieved from employee object at the specified index in employeemanagers lsit.
 QVariant EmployeeListModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid() || index.row() >= employeeManager->getEmployees().count())
         return QVariant();
@@ -40,6 +43,10 @@ QVariant EmployeeListModel::data(const QModelIndex &index, int role) const {
     }
 }
 
+// maps integer role identifiers to QByteArray role names for use in QML,
+// enables access to employee data fields in QML using readable names,
+// such as 'name', 'ssn', 'type', etc., rather than numeric role IDs.
+// essential for integrating custom data roles with QML view components.
 QHash<int, QByteArray> EmployeeListModel::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[Qt::DisplayRole] = "name";
@@ -55,6 +62,7 @@ QHash<int, QByteArray> EmployeeListModel::roleNames() const {
     return roles;
 }
 
+// amount of employees with different names
 int EmployeeListModel::countDistinct() const {
     QSet<QString> uniqueEmployeeNames;
     auto employeeList = employeeManager->getEmployees();
@@ -64,6 +72,7 @@ int EmployeeListModel::countDistinct() const {
     return uniqueEmployeeNames.size();
 }
 
+// used when employee data changes
 void EmployeeListModel::updateData() {
     beginResetModel();
     endResetModel();

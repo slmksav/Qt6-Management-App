@@ -24,6 +24,7 @@ void Employee::setAttribute(const QString& key, const QVariant& value) {
     attributes[key] = value;
 }
 
+// calculate salary based on employee type and attributes, qvariantmap = associative array
 QVariantMap Employee::calculateSalary() const {
     QVariantMap salaryDetails;
     double salary = 0.0;

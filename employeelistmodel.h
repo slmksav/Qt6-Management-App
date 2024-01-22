@@ -7,6 +7,7 @@
 #include <QAbstractListModel>
 
 
+// model for representing employee data in a list, extends QAbstractListModel to interface with model-view framework
 class EmployeeListModel : public QAbstractListModel {
     Q_OBJECT
 
@@ -14,6 +15,7 @@ public:
     explicit EmployeeListModel(EmployeeManager* manager, QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
 
@@ -30,6 +32,7 @@ public:
         RoleOutcomeClaim
     };
 
+    // specific utility counts distinct employees (names)
     Q_INVOKABLE int countDistinct() const;
 
 public slots:

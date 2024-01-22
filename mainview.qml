@@ -50,7 +50,7 @@ Rectangle {
                 TextField { id: monthlyCompField; placeholderText: "Monthly Compensation"; Layout.fillWidth: true }
                 TextField { id: hourlyRateField; placeholderText: "Hourly Compensation"; Layout.fillWidth: true }
                 TextField { id: doneHoursField; placeholderText: "Done Hours"; Layout.fillWidth: true }
-                TextField { id: bonusPercentageField; placeholderText: "Bonus %"; Layout.fillWidth: true }
+                TextField { id: bonusPercentageField; placeholderText: "Bonus % (0-100)"; Layout.fillWidth: true }
                 TextField { id: realizedOutcomeField; placeholderText: "Realized Outcome"; Layout.fillWidth: true }
                 TextField { id: outcomeClaimField; placeholderText: "Outcome Claim"; Layout.fillWidth: true }
 
@@ -105,15 +105,20 @@ Rectangle {
                         employeeManager.addEmployee(nameField.text, ssnField.text, employeeType.currentText, attributes);
                     }
                 }
-              }
-          }
+
+            }
+
+        }
 
         // just a separator line
              Rectangle {
                  width: 2
                  color: "#cccccc"
                  Layout.fillHeight: true
+
+
              }
+
 
              GroupBox {
                  title: "Employees"
@@ -154,7 +159,7 @@ Rectangle {
                                      }
 
                                      Text {
-                                         text: "SSN: " + model.ssn
+                                         text: "Calculated Salary: " + model.salary.actualSalary
                                          font.pixelSize: 12
                                          Layout.alignment: Qt.AlignLeft
                                      }
@@ -264,6 +269,7 @@ Rectangle {
                          Layout.fillWidth: true
                          Layout.topMargin: 10
                      }
+
 
                  }
              }

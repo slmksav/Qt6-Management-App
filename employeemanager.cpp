@@ -8,7 +8,7 @@
 
 EmployeeManager::EmployeeManager(QObject *parent, const QString& csvFilePath)
     : QObject(parent), csvFilePath(csvFilePath) {
-    loadFromCsv(csvFilePath);
+    loadFromCsv(csvFilePath);  // stores the path which is initially pre-defined in mainwindow.cpp too
 }
 
 EmployeeManager::~EmployeeManager() {
@@ -16,6 +16,7 @@ EmployeeManager::~EmployeeManager() {
     employees.clear();
 }
 
+// utility to parse CSV data into fields. standard logic
 QStringList EmployeeManager::parseCSV(const QString &string) {
     enum State {Normal, Quote} state = Normal;
     QStringList fields;
@@ -56,6 +57,7 @@ QStringList EmployeeManager::parseCSV(const QString &string) {
     return fields;
 }
 
+// actually parses employee data from given CSV file according to defined attributes
 void EmployeeManager::loadFromCsv(const QString& fileName) {
     QFile file(fileName);
     qDebug() << "Trying to open CSV file at:" << fileName;
@@ -109,10 +111,12 @@ void EmployeeManager::loadFromCsv(const QString& fileName) {
     file.close();
 }
 
+// read-only getter, useful to have it separate to call
 QList<Employee*> EmployeeManager::getEmployees() const {
     return employees;
 }
 
+// maps the employee data for QML presentation
 QVariantList EmployeeManager::getEmployeesForQml() const {
     QVariantList employeeList;
     for (Employee* employee : employees) {
@@ -136,6 +140,7 @@ QVariantList EmployeeManager::getEmployeesForQml() const {
     return employeeList;
 }
 
+// saves the current employee data into the loaded CSV
 void EmployeeManager::saveToCsv() {
     if (csvFilePath.isEmpty()) {
         qWarning() << "CSV file path is not set.";
@@ -166,6 +171,7 @@ void EmployeeManager::saveToCsv() {
     file.close();
 }
 
+// this slot passes the data to be written into the CSV when inserting new employee, then calls saving
 void EmployeeManager::addEmployee(const QString& name, const QString& ssn, const QString& type, const QVariantMap& attributes) {
     Employee* newEmployee = new Employee(name, ssn, type, attributes);
     employees.append(newEmployee);
@@ -173,6 +179,7 @@ void EmployeeManager::addEmployee(const QString& name, const QString& ssn, const
     emit employeeListChanged();
 }
 
+// this slot loads the CSV data from a file and resets the employee data from cache to show only the presently loaded CSVs employee data
 void EmployeeManager::loadCsv(const QString& filePath) {
     QUrl fileUrl(filePath);
     QString localPath = fileUrl.isLocalFile() ? fileUrl.toLocalFile() : filePath;
